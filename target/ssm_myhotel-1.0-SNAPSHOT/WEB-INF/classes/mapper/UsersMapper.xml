@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bdqn.dao.UsersMapper">
+    <select id="findUsersByPage" resultType="com.bdqn.entity.Users">
+        select * from sys_users
+    </select>
+
+    <insert id="addUsers">
+        insert into sys_users(username,password,sex,identitys,phone,email)
+        values (#{username},#{password},#{sex},#{identitys},#{phone},#{email})
+    </insert>
+
+    <select id="findUsersByName" resultType="com.bdqn.entity.Users">
+        select * from sys_users
+        where username like #{username}
+    </select>
+
+    <update id="updateUsers">
+        update sys_users
+        <set>
+            <if test="username!=null and username!=''">
+                username=#{username},
+            </if>
+            <if test="phone!=null and phone!=''">
+                phone=#{phone},
+            </if>
+            <if test="identitys!=null and identitys!=''">
+                identitys=#{identitys},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from sys_users where id=#{id}
+    </delete>
+    
+    <select id="frontLogin" resultType="com.bdqn.entity.Users">
+        select * from sys_users
+       where username=#{username} and password=#{password}
+    </select>
+
+</mapper>

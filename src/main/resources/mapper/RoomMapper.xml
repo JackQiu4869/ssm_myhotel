@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bdqn.dao.RoomMapper">
+<select id="findFrontLogout" resultType="com.bdqn.entity.Room">
+   select * from room
+   where room_state like #{room_state}
+</select>
+    <update id="clearFrontLogout">
+        update room 
+        <set>
+           name=null,
+            identitys=null,
+            room_state=null,
+        </set>
+        where room_state like #{room_state}
+    </update>
+</mapper>
